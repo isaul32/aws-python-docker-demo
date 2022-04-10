@@ -14,6 +14,8 @@ jobs:
     executor: serverless/default
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - aws-cli/setup
       - serverless/setup:
           app-name: serverless-framework-orb
