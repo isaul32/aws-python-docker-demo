@@ -15,11 +15,13 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 19.03.13
+          version: 20.10.11
+          docker_layer_caching: true
       - aws-cli/setup
       - serverless/setup:
           app-name: serverless-framework-orb
           org-name: circleci
       - run:
           name: deploy
-          command: serverless deploy --verbose
+          command: |
+            AWS_ACCESS_KEY_ID=$AWS_DEV_KEY AWS_SECRET_ACCESS_KEY=$AWS_DEV_SECRET serverless deploy --verbose
