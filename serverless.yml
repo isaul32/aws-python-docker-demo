@@ -1,0 +1,19 @@
+
+service: aws-python-docker-demo
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  ecr:
+    images:
+      appimage:
+        path: ./
+  region: eu-west-1
+
+functions:
+  hello:
+    image:
+      name: appimage
+    events:
+      - httpApi: '*'
