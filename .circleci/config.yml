@@ -20,4 +20,4 @@ jobs:
           org-name: circleci
       - run:
           name: deploy
-          command: serverless deploy -v
+          command: serverless deploy --verbose
