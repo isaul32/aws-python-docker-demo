@@ -1,13 +1,14 @@
 version: 2.1
 
-orbs:
-  aws-cli: circleci/aws-cli@3.0.0
-  serverless: circleci/serverless-framework@1.0.1
-
 workflows:
   deploy:
     jobs:
-      - deploy
+      - deploy:
+          type: approval
+
+orbs:
+  aws-cli: circleci/aws-cli@3.0.0
+  serverless: circleci/serverless-framework@1.0.1
 
 jobs:
   deploy:
@@ -24,4 +25,4 @@ jobs:
       - run:
           name: deploy
           command: |
-            AWS_ACCESS_KEY_ID=$AWS_DEV_KEY AWS_SECRET_ACCESS_KEY=$AWS_DEV_SECRET serverless deploy --verbose
+            serverless deploy --verbose
